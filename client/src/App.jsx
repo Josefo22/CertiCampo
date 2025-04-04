@@ -18,10 +18,10 @@ function App() {
       <CultivesProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Inicio />}/>
             <Route path="/login" element={<LoginPage />}/>
 
             <Route element={<ProtectedRoute />}>
+              <Route path="/" element={<Inicio />}/>
               <Route path="/registros" element={<RegistroCultivos/>} /> 
               <Route path="/nuevo-registro" element={<NuevoRegistro/>} />
               <Route path="/certificados" element={<Certificados/>} /> 

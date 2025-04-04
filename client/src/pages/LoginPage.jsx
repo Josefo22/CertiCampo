@@ -20,9 +20,9 @@ function LoginPage() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors: formErrors },
     } = useForm();
-    const {login, user} = useAuth();
+    const { login, user, errors: authErrors, loading } = useAuth();
     const token = Cookies.get('token');
     console.log(token);
     const navigate = useNavigate();
@@ -43,7 +43,10 @@ function LoginPage() {
     }, []);
 
     const onSubmit = handleSubmit(async (values) => {
-        await login(values);
+        const result = await login(values);
+        if (result) {
+            navigate('/');
+        }
     });
 
     return (
@@ -52,16 +55,27 @@ function LoginPage() {
                 <h1>Certicampo</h1>
                 <img src={Logo} alt="Logo Certicampo"/>
                 <h2>Ingresar</h2>
+                {authErrors && (
+                    <div className="error-message">
+                        <p>{authErrors}</p>
+                    </div>
+                )}
                 <form onSubmit={onSubmit} id="loginForm">
                     <div className="user-box">
                         <input type="text" {...register("userid", { required: true})} placeholder="Número de Identificación"/>
-                        {errors.userid && <p>Este campo es requerido</p>}
+                        {formErrors.userid && <p className="form-error">Este campo es requerido</p>}
                     </div>
                     <div className="password-box">
                         <input type="password" {...register("password", {required: true})} placeholder="Contraseña"/>
-                        {errors.password && <p>Este campo es requerido</p>}
+                        {formErrors.password && <p className="form-error">Este campo es requerido</p>}
                     </div>
-                    <button type="submit" className="button-login">Ingresar</button>
+                    <button 
+                        type="submit" 
+                        className="button-login" 
+                        disabled={loading}
+                    >
+                        {loading ? 'Cargando...' : 'Ingresar'}
+                    </button>
                 </form>
             </div>
         </div>

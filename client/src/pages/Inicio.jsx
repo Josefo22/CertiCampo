@@ -19,7 +19,7 @@ function Inicio(){
     return (
         <div className="inicio">
             <MenuPrincipal />
-            <h1>Hola, {user.name} </h1>
+            <h1>Hola, {user ? user.name : 'Usuario'} </h1>
             <div className="announcements-container">
                 <div className="grid">
                     <div>

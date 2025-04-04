@@ -65,6 +65,30 @@
     width: 100%;
 }
 
+.button-login:disabled {
+    background-color: #b586b8;
+    cursor: not-allowed;
+}
+
+/* Error messages */
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.form-error {
+    color: #c62828;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 0;
+    text-align: left;
+}
+
 @media (min-width: 768px) {
     .login-box {
         padding: 30px;
